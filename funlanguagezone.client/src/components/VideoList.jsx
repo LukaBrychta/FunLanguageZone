@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import VideoThumbnail from './VideoThumbnail';
 
-const VideoList = ({ selectedCategory }) => {
+const VideoList = ({ selectedCategory, selectedLanguage }) => {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
@@ -23,17 +23,21 @@ const VideoList = ({ selectedCategory }) => {
         ? videos.filter(video => video.genres.includes(selectedCategory))
         : videos;
 
+    const finalFilteredVideos = selectedLanguage
+        ? filteredVideos.filter(video => video.language.includes(selectedLanguage))
+        : filteredVideos;
+
     return (
         <Container>
             <Row>
-                {Array.isArray(filteredVideos) && filteredVideos.length > 0 ? (
-                    filteredVideos.map(video => (
+                {Array.isArray(finalFilteredVideos) && finalFilteredVideos.length > 0 ? (
+                    finalFilteredVideos.map(video => (
                         <Col key={video.id} xs={6} md={4} lg={3}>
                             <VideoThumbnail video={video} />
                         </Col>
                     ))
                 ) : (
-                    <p>No videos available. Try refreshing the page.</p>
+                    <p>No videos available.</p>
                 )}
             </Row>
         </Container>

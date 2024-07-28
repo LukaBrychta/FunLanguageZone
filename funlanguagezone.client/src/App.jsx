@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 const App = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [categories, setCategories] = useState([]);
+    const [selectedLanguage, setSelectedLanguage] = useState(null);
+    const [languages, setLanguages] = useState(["EN", "DE"]);
 
     useEffect(() => {
         const fetchVideos = async () => {
@@ -31,12 +33,16 @@ const App = () => {
         setSelectedCategory(category);
     };
 
+    const handleLanguageSelect = (language) => {
+        setSelectedLanguage(language);
+    };
+
     return (
         <Router>
             <div className="main-content">
-                <NavBar categories={categories} onCategorySelect={handleCategorySelect} />
+                <NavBar categories={categories} onCategorySelect={handleCategorySelect} languages={languages} onLanguageSelect={handleLanguageSelect} />
                 <Routes>
-                    <Route path="/" element={<VideoList selectedCategory={selectedCategory} />} />
+                    <Route path="/" element={<VideoList selectedCategory={selectedCategory} selectedLanguage={selectedLanguage} />} />
                     <Route path="/video/:id" element={<VideoPlayer />} />
                 </Routes>
             </div>

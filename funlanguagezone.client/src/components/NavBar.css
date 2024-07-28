@@ -1,3 +1,24 @@
+.SelectedLanguageDE .nav-link {
+    background-image: url('../../public/flag_de.png');
+    background-size: cover;
+    background-position: center;
+    color: rgba(0, 0, 0, 0)
+}
+
+.SelectedLanguageEN .nav-link {
+    background-image: url('../../public/flag_en.png');
+    background-size: cover;
+    background-position: center;
+    color: rgba(0, 0, 0, 0)
+}
+
+.SelectedLanguageCZ .nav-link {
+    background-image: url('../../public/flag_cz.png');
+    background-size: cover;
+    background-position: center;
+    color: rgba(0, 0, 0, 0)
+}
+
 .StyledNavbar {
     padding: 5px;
     margin-bottom: 20px;

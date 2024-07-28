@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Row, Col, Container } from 'react-bootstrap';
 import './VideoPlayer.css';
+import flagCZ from '../../public/Flag_CZ.png';
+import flagDE from '../../public/Flag_DE.png';
+import flagEN from '../../public/Flag_EN.png';
 
 const VideoPlayer = () => {
     const { id } = useParams();
@@ -34,13 +37,27 @@ const VideoPlayer = () => {
 
     if (!video) return <div>Loading...</div>;
 
+    let flag = "";
+    if (video.language == "CZ") {
+        flag = flagCZ;
+    }
+
+    else if (video.language == "EN") {
+        flag = flagEN;
+    }
+
+    else if (video.language == "DE") {
+        flag = flagDE;
+    }
+
     return (
         <Container>
-            <h1>{video.title}</h1>
-            <h2>{video.artist}</h2>
-            <p>{video.genres.join(', ')}</p>
             <Row>
                 <Col xs={12} md={6} lg={6}>
+                    <h1>{video.title}</h1>
+                    <h2>{video.artist}</h2>
+                    <img src={flag} alt="Flag" width="50" height="50" />
+                    <p>{video.genres.join(', ')}</p>
                     <div className="video-container">
                         <iframe
                             title={video.title}

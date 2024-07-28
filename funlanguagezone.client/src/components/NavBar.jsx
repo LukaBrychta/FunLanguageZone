@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NavBar.css';
 
-const NavBar = ({ categories, onCategorySelect }) => {
+const NavBar = ({ categories, onCategorySelect, languages, onLanguageSelect }) => {
     const [selectedCategory, setSelectedCategory] = useState('All categories');
+    const [selectedLanguage, setSelectedLanguage] = useState("All languages");
     const navigate = useNavigate();
 
     const handleCategorySelect = (category) => {
@@ -15,6 +16,27 @@ const NavBar = ({ categories, onCategorySelect }) => {
             navigate('/');
         }
     };
+    const handleLanguageSelect = (language) => {
+        setSelectedLanguage(language);
+        if (onLanguageSelect) {
+            onLanguageSelect(language);
+            navigate('/');
+        }
+    }
+
+    let classLanguage = "";
+    if (selectedLanguage == "CZ") {
+        classLanguage = "SelectedLanguageCZ";
+    }
+
+    else if (selectedLanguage == "EN") {
+        classLanguage = "SelectedLanguageEN";
+    }
+
+    else if (selectedLanguage == "DE") {
+        classLanguage = "SelectedLanguageDE";
+    }
+
 
     return (
         <Navbar className="StyledNavbar">
@@ -23,6 +45,13 @@ const NavBar = ({ categories, onCategorySelect }) => {
                 {categories.map(category => (
                     <NavDropdown.Item key={category} onClick={() => handleCategorySelect(category)}>
                         {category}
+                    </NavDropdown.Item>
+                ))}
+            </NavDropdown>
+            <NavDropdown className={classLanguage} title={selectedLanguage}>
+                {languages.map(language => (
+                    <NavDropdown.Item key={language} onClick={() => handleLanguageSelect(language)}>
+                        {language}
                     </NavDropdown.Item>
                 ))}
             </NavDropdown>
